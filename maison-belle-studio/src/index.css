@@ -1,0 +1,164 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------
+   Identidade visual provisória — Maison Belle Studio
+   Para trocar a marca, altere apenas os tokens abaixo e
+   src/config/salon.ts (nome, contatos, horários).
+------------------------------------------------------------------- */
+@theme {
+  --font-display: "Cormorant Garamond", "Times New Roman", Georgia, serif;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Paleta "sunset" — luz natural, tons de pele e terracota.
+     Fundos claros e quentes; terracota como cor de ação;
+     marrom profundo no lugar do preto. */
+  --color-ivory: #faf2ea; /* fundo principal */
+  --color-cream: #fff9f4; /* superfícies (cards, campos) */
+  --color-sand: #f2dfd2; /* fundo secundário */
+  --color-linen: #e8d3c4; /* bordas e divisores */
+  --color-stone: #9b847a; /* texto terciário */
+  --color-taupe: #79665e; /* texto secundário */
+  --color-cocoa: #5d4740;
+  --color-ink: #49352f; /* marrom profundo: textos e contraste */
+  --color-rose: #b9614a; /* terracota (ação principal) */
+  --color-rose-dark: #974834;
+  --color-blush: #f7e4d9; /* nude rosado */
+  --color-gold: #de8b72; /* coral queimado (detalhes) */
+  --color-peach: #f3c4a6;
+  --color-dusk: #b96f78; /* rosa queimado */
+  --color-burnt: #c5622f; /* laranja queimado em pequenos detalhes */
+  --color-shell: #f6e9df; /* fundo do painel */
+  --color-sage: #6b7a55;
+  --color-sage-soft: #e7eadb;
+  --color-danger: #b23f35;
+  --color-danger-soft: #f8ded8;
+
+  --ease-soft: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-ivory text-ink font-sans antialiased;
+    overflow-x: hidden;
+  }
+  ::selection {
+    background: var(--color-blush);
+    color: var(--color-ink);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-rose);
+    outline-offset: 2px;
+  }
+  button:not(:disabled),
+  [role="button"] {
+    cursor: pointer;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .eyebrow {
+    @apply text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-rose-dark;
+  }
+  .display {
+    @apply font-display font-normal leading-[1.02] tracking-[-0.01em];
+  }
+  .field {
+    @apply w-full rounded-lg border border-linen bg-cream px-3.5 py-2.5 text-[0.95rem] text-ink placeholder:text-stone/70 transition focus:border-rose focus:bg-white focus:outline-none focus:ring-2 focus:ring-rose/15;
+  }
+  .field-error {
+    @apply border-danger focus:border-danger focus:ring-danger/15;
+  }
+  .hairline {
+    @apply border-linen;
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes slide-in-right {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.7s var(--ease-soft) both;
+}
+.animate-fade-in {
+  animation: fade-in 0.25s ease-out both;
+}
+.animate-slide-in-right {
+  animation: slide-in-right 0.32s var(--ease-soft) both;
+}
+.animate-toast-in {
+  animation: toast-in 0.3s var(--ease-soft) both;
+}
+
+/* Revelação suave ao rolar (controlada por useReveal) */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.8s var(--ease-soft),
+    transform 0.8s var(--ease-soft);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+/* Arco usado nas fotos do hero e da equipe */
+.arch {
+  border-radius: 999px 999px 18px 18px;
+}

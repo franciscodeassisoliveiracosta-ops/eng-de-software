@@ -1,0 +1,5 @@
+Coloque aqui a fotografia principal do site com o nome hero.jpg
+(recomendado: 1600 x 1800 px ou maior, retrato/vertical, mulher com cabelo em destaque,
+luz quente, área mais limpa à esquerda da imagem).
+
+Enquanto hero.jpg não existir, o site usa fotos de referência online (Unsplash).
